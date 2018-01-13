@@ -3,11 +3,13 @@ package com.wwd.spring.cloud.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.wwd.spring.cloud.service.FeginSimpleService;
 import com.wwd.spring.cloud.service.SimpleService;
 
 /**
@@ -26,11 +28,25 @@ public class SimpleController {
 	@Autowired
 	private SimpleService simpleService;
 	
+	@Autowired
+	private FeginSimpleService feginSimpleService;
+	
 	@RequestMapping("hello")
 	public String hell() {
 		simpleService.out();
 		log.info("Cloud Customer Called Remote Method Success!!!");
 		
 		return "Cloud Customer Called Success";
+	}
+	
+	@RequestMapping("dc")
+	public void dc() {
+		simpleService.dc();
+	}
+	
+	@RequestMapping("feignTest")
+	public void feignTest() {
+		String result = feginSimpleService.out();
+		log.info("feign call success result is: {}", result);
 	}
 }

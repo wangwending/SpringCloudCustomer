@@ -18,13 +18,11 @@ import org.springframework.web.client.RestTemplate;
 		* @author wangwending
 		* @since JDK 1.7
  */
-//@SpringBootApplication
-//@EnableFeignClients
-//@EnableDiscoveryClient
-@EnableFeignClients
-@EnableDiscoveryClient
 @SpringBootApplication
-@ComponentScan(value = {"com.wwd"})
+//@EnableEurekaClient
+@EnableDiscoveryClient
+@EnableFeignClients(basePackages = {"com.wwd.spring.cloud.service"})
+@ComponentScan(value = {"com.wwd.spring.cloud.controller", "com.wwd.spring.cloud.service"})
 public class CloudCustomerApplication {
 	
 	private final static Logger log = LoggerFactory.getLogger(CloudCustomerApplication.class);

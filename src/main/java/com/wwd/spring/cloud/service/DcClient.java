@@ -1,7 +1,9 @@
 package com.wwd.spring.cloud.service;
 
 import org.springframework.cloud.netflix.feign.FeignClient;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import com.wwd.spring.cloud.service.impl.DcClientFeignFallBack;
 
 /**
  * 
@@ -10,9 +12,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 		* @author wangwending
 		* @since JDK 1.7
  */
-@FeignClient("provider")
+@FeignClient(value = "provider", fallback=DcClientFeignFallBack.class)
 public interface DcClient {
 	
-	@PostMapping("/dc")
+	@RequestMapping("/dc")
 	String consumer();
 }
